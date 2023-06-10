@@ -26,20 +26,22 @@ import { useSelector } from "react-redux";
 const Container = styled.div`
   flex: 1;
   background-color: ${({ theme }) => theme.bgLighter};
-  height: 100vh;
+  height: 120vh;
+  width: 100vw;
   color: ${({ theme }) => theme.text};
   position: sticky;
   top: 0;
 `;
 const Wrapper = styled.div`
   padding: 16px 24px;
+  /* background-color: red; */
 `;
 const Logo = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-bottom: 10px;
-  gap: 5px;
+  margin-bottom: 2px;
+  gap: 2px;
 `;
 
 const Img = styled.img`
@@ -49,9 +51,9 @@ const Img = styled.img`
 const Item = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   cursor: pointer;
-  padding: 7.5px 0px;
+  padding: 4.5px 0px;
 
   &:hover {
     background-color: ${({ theme }) => theme.soft};
@@ -61,6 +63,7 @@ const Item = styled.div`
 const Hr = styled.hr`
   margin: 15px;
   border: 0.5px solid ${({ theme }) => theme.soft};
+  background-color: ${({ theme }) => theme.text};
 `;
 
 const Login = styled.div``;

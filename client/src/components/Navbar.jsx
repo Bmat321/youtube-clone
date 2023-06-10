@@ -3,7 +3,7 @@ import {
   SearchOutlined,
   VideoCallOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -35,6 +35,7 @@ const Search = styled.div`
   display: flex;
   border-radius: 3px;
   border: 1px solid #ccc;
+  color:${({ theme }) => theme.text};
   padding: 5px;
 `;
 
@@ -42,6 +43,7 @@ const Input = styled.input`
   outline: none;
   border: none;
   background-color: transparent;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Button = styled.button`
@@ -54,15 +56,16 @@ const Button = styled.button`
   display: flex;
   gap: 5px;
   cursor: pointer;
-  color: #3ea6ff;
+
+  color: ${({ theme }) => theme.text};
 `;
 
 const User = styled.div`
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: ${({ theme }) => theme.text};
   gap: 10px;
+  color:${({ theme }) => theme.text};
   cursor: pointer;
 `;
 const Avatar = styled.img`
@@ -75,19 +78,27 @@ const Avatar = styled.img`
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const navigate = useNavigate();
 
   return (
     <>
       <Container>
         <Wrapper>
           <Search>
-            <Input placeholder="Searching..." />
-            <SearchOutlined />
+            <Input
+              placeholder="Searching..."
+              onChange={(e) => setQ(e.target.value)}
+            />
+            <SearchOutlined onClick={() => navigate(`/search?q=${q}`)} />
           </Search>
           {currentUser ? (
             <User>
-              <VideoCallOutlined onClick={() => setOpen(true)} />
-              <Avatar src={currentUser.image} />
+              <VideoCallOutlined
+                color="inherit"
+                onClick={() => setOpen(true)}
+              />
+              <Avatar src={currentUser.image} referrerPolicy="no-referrer" />
               {currentUser.name}
             </User>
           ) : (

@@ -8,7 +8,7 @@ import {
 } from "@mui/icons-material";
 import styled from "styled-components";
 import Comments from "../components/Comments";
-import Card from "../components/Card";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from "timeago.js";
 import { dislike, fetchSuccess, like } from "../redux/videoSlice";
 import { subscriptions } from "../redux/userSlice";
+import Reccommendation from "../components/Reccommendation";
 const Container = styled.div`
   display: flex;
   gap: 24px;
@@ -61,9 +62,7 @@ const Hr = styled.hr`
   color: ${({ theme }) => theme.soft};
 `;
 
-const Reccommendation = styled.div`
-  flex: 2;
-`;
+
 const RChannel = styled.div`
   display: flex;
   justify-content: space-between;
@@ -167,7 +166,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} />
+          {currentVideo && <VideoFrame src={currentVideo.videoUrl} controls />}
         </VideoWrapper>
         {currentVideo && (
           <>
@@ -220,25 +219,9 @@ const Video = () => {
           </Subscribe>
         </RChannel>
         <Hr />
-        <Comments videoId={currentVideo._id} />
+        {currentVideo && <Comments videoId={currentVideo._id} />}
       </Content>
-      {/* <Reccommendation>
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-        <Card type="sm" />
-      </Reccommendation> */}
+      {currentVideo && <Reccommendation tags={currentVideo.tags} />}
     </Container>
   );
 };
